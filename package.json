@@ -1,0 +1,8 @@
+{
+  "name": "safafi-cinema",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Safafi Cinema web app and fixed-upstream API relay",
+  "engines": { "node": "22.x" },
+  "scripts": { "start": "node server.cjs", "build": "node --check server.cjs" }
+}
