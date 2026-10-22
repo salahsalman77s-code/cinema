@@ -1,0 +1,272 @@
+
+/* ===================================================================================================
+   Safafi Cinema — web profile (phones and computers). Everything here is scoped to
+   html:not(.safafi-tv-profile), so the TV build is untouched.
+   =================================================================================================== */
+
+/* ---------- Pointer devices: focus visuals only while the keyboard drives focus ---------- */
+html:not(.safafi-tv-profile):not(.sf-keys) .safafi-card:focus{transform:none}
+html:not(.safafi-tv-profile):not(.sf-keys) .safafi-card:focus .sf-card-art{box-shadow:none}
+html:not(.safafi-tv-profile):not(.sf-keys) .safafi-card:focus .sf-card-play{opacity:0}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-button:focus{background:var(--sf-glass);color:#fff;transform:none}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-button.sf-primary:focus{background:var(--sf-brand)}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-button.sf-primary:focus .sf-icon{color:inherit}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-icon-button:focus{background:var(--sf-glass);color:#fff;transform:none}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-chip:focus{background:var(--sf-glass);color:var(--sf-text-2);border-color:transparent;transform:none}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-chip[aria-pressed="true"]:focus{border-color:rgba(255,255,255,.85);color:#fff;background:rgba(255,255,255,.08)}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-navigation nav button:focus{background:transparent;color:rgba(245,245,247,.58);transform:none}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-navigation nav button[aria-current="page"]:focus{color:#fff}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-setting:focus-within,html:not(.safafi-tv-profile):not(.sf-keys) .sf-toggle:focus{background:transparent;color:var(--sf-text)}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-setting:focus-within select{background:var(--sf-glass);color:#fff}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-toggle:focus small{color:var(--sf-text-3)}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-episode-card:focus .sf-episode-art{transform:none;box-shadow:none}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-person:focus .sf-person-photo{transform:none;box-shadow:none}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-more-tile:focus{background:var(--sf-raised);color:var(--sf-text-2);transform:none}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-key:focus{background:rgba(255,255,255,.07);color:var(--sf-text);transform:none}
+
+/* Browse mode (focus-follows-row) is a remote concept; with a pointer every row stays visible. */
+html:not(.safafi-tv-profile) [data-browse] .sf-hero-copy,html:not(.safafi-tv-profile) [data-browse] .sf-pager{opacity:1;transform:none}
+html:not(.safafi-tv-profile) [data-browse] .sf-rail[data-pos="above"]{opacity:1;pointer-events:auto}
+html:not(.safafi-tv-profile):not(.sf-keys) .sf-spotlight{display:none}
+html:not(.safafi-tv-profile) .sf-keyboard,html:not(.safafi-tv-profile) .sf-keyboard+*{display:none}
+html:not(.safafi-tv-profile) a,html:not(.safafi-tv-profile) button{-webkit-tap-highlight-color:transparent}
+
+/* ---------- Mouse: hover mirrors the TV focus look ---------- */
+@media (hover:hover) and (pointer:fine){
+  html:not(.safafi-tv-profile) .safafi-card:hover{transform:scale(1.06);z-index:3}
+  html:not(.safafi-tv-profile) .safafi-card:hover .sf-card-art{box-shadow:0 0 0 3px #fff,0 18px 36px rgba(0,0,0,.6)}
+  html:not(.safafi-tv-profile) .safafi-card:hover .sf-card-meta{display:block}
+  html:not(.safafi-tv-profile) .safafi-card:hover .sf-card-play{opacity:1}
+  html:not(.safafi-tv-profile) .sf-card:hover>[data-card-action]{opacity:1}
+  html:not(.safafi-tv-profile) .sf-button:hover{background:#fff;color:#0b0b0e}
+  html:not(.safafi-tv-profile) .sf-button.sf-primary:hover{background:var(--sf-brand-2);color:#fff}
+  html:not(.safafi-tv-profile) .sf-icon-button:hover,html:not(.safafi-tv-profile) .sf-chip:hover{background:#fff;color:#0b0b0e}
+  html:not(.safafi-tv-profile) .sf-navigation nav button:hover{background:rgba(255,255,255,.1);color:#fff}
+  html:not(.safafi-tv-profile) .sf-navigation:hover{width:var(--sf-nav-open)}
+  html:not(.safafi-tv-profile) .sf-navigation:hover .sf-nav-label,html:not(.safafi-tv-profile) .sf-navigation:hover .sf-brand-word,html:not(.safafi-tv-profile) .sf-navigation:hover .sf-nav-caption{opacity:1;transform:none}
+  html:not(.safafi-tv-profile) .sf-navigation:hover .sf-nav-scrim{opacity:1;visibility:visible;transition:opacity var(--sf-med) var(--sf-ease),visibility 0s}
+  html:not(.safafi-tv-profile) .sf-setting:hover,html:not(.safafi-tv-profile) .sf-toggle:hover{background:rgba(255,255,255,.06)}
+  html:not(.safafi-tv-profile) .sf-episode-card:hover .sf-episode-art{transform:scale(1.04);box-shadow:0 0 0 3px #fff}
+  html:not(.safafi-tv-profile) .sf-more-tile:hover{background:#fff;color:#0b0b0e}
+  html:not(.safafi-tv-profile) .sf-rail-track{scrollbar-width:thin}
+}
+
+/* ---------- Phones (and narrow windows) ---------- */
+@media (max-width:760px){
+  html:not(.safafi-tv-profile){--sf-nav:0px;--sf-gutter:16px;--sf-end:16px;--sf-card-w:44vw;--sf-gap:10px;--sf-radius:10px;--sf-radius-lg:16px;--sf-hero-h:auto}
+  html:not(.safafi-tv-profile) .sf-app{font-size:15px;line-height:1.5}
+  html:not(.safafi-tv-profile) .sf-content{margin-inline-start:0;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+
+  /* Bottom tab bar */
+  html:not(.safafi-tv-profile) .sf-navigation{top:auto;bottom:0;left:0!important;right:0!important;width:auto!important;height:calc(60px + env(safe-area-inset-bottom));padding:0 0 env(safe-area-inset-bottom);flex-direction:row;background:rgba(11,11,14,.97);border-top:1px solid var(--sf-line);transition:none}
+  html:not(.safafi-tv-profile) .sf-navigation::before,html:not(.safafi-tv-profile) .sf-nav-scrim,html:not(.safafi-tv-profile) .sf-brand,html:not(.safafi-tv-profile) .sf-nav-caption{display:none}
+  html:not(.safafi-tv-profile) .sf-navigation nav{flex-direction:row;align-items:stretch;justify-content:space-around;width:100%;margin:0;padding:0 2px;gap:0}
+  html:not(.safafi-tv-profile) .sf-navigation nav button{flex:1 1 0;min-width:0;flex-direction:column;justify-content:center;gap:3px;height:60px;padding:4px 0 0;border-radius:0;font-size:10px;font-weight:600;transform:none!important;background:transparent!important}
+  html:not(.safafi-tv-profile) .sf-nav-icon{width:auto}
+  html:not(.safafi-tv-profile) .sf-nav-icon .sf-icon{width:23px;height:23px}
+  html:not(.safafi-tv-profile) .sf-nav-label{opacity:1!important;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;line-height:1.2}
+  html:not(.safafi-tv-profile) .sf-navigation nav button[aria-current="page"]{color:#fff!important}
+  html:not(.safafi-tv-profile) .sf-navigation nav button[aria-current="page"]::before{top:0;bottom:auto;inset-inline-start:28%;inset-inline-end:28%;width:auto;height:3px}
+  html:not(.safafi-tv-profile) .sf-navigation nav button[data-nav-path="/history"]{display:none}
+
+  /* Typography & buttons */
+  html:not(.safafi-tv-profile) .sf-eyebrow{font-size:11px;gap:8px}
+  html:not(.safafi-tv-profile) .sf-eyebrow-mark{width:6px;height:14px}
+  html:not(.safafi-tv-profile) .sf-metadata{font-size:13px;gap:4px 0}
+  html:not(.safafi-tv-profile) .sf-metadata>*+*::before{width:3px;height:3px;margin:0 8px}
+  html:not(.safafi-tv-profile) .sf-rating-badge .sf-icon{width:13px;height:13px}
+  html:not(.safafi-tv-profile) .sf-synopsis{font-size:14px;line-height:1.55}
+  html:not(.safafi-tv-profile) .sf-actions{gap:10px}
+  html:not(.safafi-tv-profile) .sf-button{height:44px;padding:0 18px;gap:8px;border-radius:10px;font-size:15px}
+  html:not(.safafi-tv-profile) .sf-button .sf-icon{width:20px;height:20px}
+  html:not(.safafi-tv-profile) .sf-icon-button{width:44px;height:44px}
+  html:not(.safafi-tv-profile) .sf-icon-button .sf-icon{width:20px;height:20px}
+  html:not(.safafi-tv-profile) .sf-chip{height:36px;padding:0 14px;font-size:13px}
+  html:not(.safafi-tv-profile) .sf-chips{gap:8px}
+  html:not(.safafi-tv-profile) .sf-unavailable{height:44px;padding:0 16px;font-size:14px}
+
+  /* Home billboard: image on top, copy below, scrolls with the page */
+  html:not(.safafi-tv-profile) .sf-hero{height:auto;padding-top:min(58vh,120vw)}
+  html:not(.safafi-tv-profile) .sf-hero>.sf-stage{position:absolute;inset:0 0 auto 0;height:min(72vh,150vw)}
+  html:not(.safafi-tv-profile) .sf-stage-image{width:100%!important;height:100%!important;left:0!important;right:0!important;object-position:center 20%}
+  html:not(.safafi-tv-profile) .sf-hero .sf-stage-scrim{background:linear-gradient(to top,var(--sf-bg) 6%,rgba(11,11,14,.72) 34%,rgba(11,11,14,.1) 64%,rgba(11,11,14,.35) 100%)!important}
+  html:not(.safafi-tv-profile) .sf-hero-copy{position:relative;inset:auto;bottom:auto;width:auto;margin:0 16px;gap:10px;align-items:center;text-align:center}
+  html:not(.safafi-tv-profile) .sf-hero-copy h1{font-size:34px;line-height:1.08;text-align:center}
+  html:not(.safafi-tv-profile) .sf-hero-copy .sf-metadata{justify-content:center}
+  html:not(.safafi-tv-profile) .sf-hero-copy .sf-synopsis{-webkit-line-clamp:3;text-align:center}
+  html:not(.safafi-tv-profile) .sf-hero-copy .sf-actions{margin-top:6px;justify-content:center;flex-wrap:nowrap}
+  html:not(.safafi-tv-profile) .sf-hero-progress{font-size:12px;gap:10px}
+  html:not(.safafi-tv-profile) .sf-hero-progress>div{width:120px;height:4px}
+  html:not(.safafi-tv-profile) .sf-pager{position:static;justify-content:center;margin:14px 0 4px}
+  html:not(.safafi-tv-profile) .sf-pager i{width:6px;height:6px}html:not(.safafi-tv-profile) .sf-pager i.is-active{width:18px}
+  html:not(.safafi-tv-profile) .sf-hero-skeleton i{width:70vw!important;height:18px}
+
+  /* Rows */
+  html:not(.safafi-tv-profile) .sf-rows{gap:2px;padding-bottom:24px}
+  html:not(.safafi-tv-profile) .sf-rail-head{gap:8px;align-items:baseline}
+  html:not(.safafi-tv-profile) .sf-rail-head h2{font-size:18px}
+  html:not(.safafi-tv-profile) .sf-rail-head p,html:not(.safafi-tv-profile) .sf-rail-count{font-size:12px}
+  html:not(.safafi-tv-profile) .sf-rail-track{padding-top:10px;padding-bottom:16px;scroll-snap-type:x proximity;scroll-padding-inline:16px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  html:not(.safafi-tv-profile) .sf-rail-track>*{scroll-snap-align:start}
+  html:not(.safafi-tv-profile) .sf-rows>.sc-rail-boundary,html:not(.safafi-tv-profile) .sf-rows>.sf-rail,html:not(.safafi-tv-profile) .sf-detail-rows>.sf-rail{contain-intrinsic-size:1px 170px}
+  html:not(.safafi-tv-profile) .sc-rail-deferred,html:not(.safafi-tv-profile) .sc-rail-load-action{gap:12px;min-height:44px}
+  html:not(.safafi-tv-profile) .sc-rail-deferred h2{font-size:18px}
+  html:not(.safafi-tv-profile) .sc-rail-deferred button,html:not(.safafi-tv-profile) .sc-rail-load-action button{height:36px;padding:0 14px;font-size:13px}
+  html:not(.safafi-tv-profile) .sf-more-tile{width:110px;height:auto;font-size:12px}
+  html:not(.safafi-tv-profile) .sf-more-tile .sf-icon{width:22px;height:22px}
+  html:not(.safafi-tv-profile) [data-safafi-state="rail-error"]{min-height:56px;padding:0 16px;font-size:14px}
+  html:not(.safafi-tv-profile) [data-safafi-state="rail-error"] *{font-size:14px!important}
+
+  /* Cards */
+  html:not(.safafi-tv-profile) .sf-card-body{inset-inline:10px;bottom:8px}
+  html:not(.safafi-tv-profile) .sf-card-body h3{font-size:13px;line-height:1.25}
+  html:not(.safafi-tv-profile) .sf-card-meta{font-size:11px}
+  html:not(.safafi-tv-profile) .sf-card-progress{height:3px}
+  html:not(.safafi-tv-profile) .sf-card-saved{top:6px;inset-inline-end:6px;width:22px;height:22px}
+  html:not(.safafi-tv-profile) .sf-card-saved .sf-icon{width:13px;height:13px}
+  html:not(.safafi-tv-profile) .sf-card-play{width:40px;height:40px;margin:-20px 0 0 -20px}
+  html:not(.safafi-tv-profile) .sf-card>[data-card-action]{display:none}
+  html:not(.safafi-tv-profile) .sf-artwork-fallback{font-size:28px}
+
+  /* Grids & pages */
+  html:not(.safafi-tv-profile) .sf-grid,html:not(.safafi-tv-profile) .sf-grid-4{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px 10px!important;padding:10px 0 20px}
+  html:not(.safafi-tv-profile) .sf-page{padding:24px 16px 32px}
+  html:not(.safafi-tv-profile) .sf-page-heading{gap:6px;margin-bottom:18px}
+  html:not(.safafi-tv-profile) .sf-page-heading h1{font-size:28px;gap:10px}
+  html:not(.safafi-tv-profile) .sf-heading-count{font-size:15px}
+  html:not(.safafi-tv-profile) .sf-page-heading p{font-size:14px}
+  html:not(.safafi-tv-profile) .sf-empty{gap:10px;margin-top:16px;padding:22px}
+  html:not(.safafi-tv-profile) .sf-empty-mark{width:8px;height:22px}
+  html:not(.safafi-tv-profile) .sf-empty h2{font-size:20px}
+  html:not(.safafi-tv-profile) .sf-empty p,html:not(.safafi-tv-profile) .sf-empty-line{font-size:14px}
+  html:not(.safafi-tv-profile) .sf-message{padding:16px;min-height:60vh}
+  html:not(.safafi-tv-profile) .sf-message>div{padding:24px;gap:12px;border-radius:18px}
+  html:not(.safafi-tv-profile) .sf-message h2{font-size:22px}html:not(.safafi-tv-profile) .sf-message p{font-size:14px}
+
+  /* Details: artwork on top, copy below */
+  html:not(.safafi-tv-profile) .sf-details{display:block;min-height:0;padding-bottom:8px}
+  html:not(.safafi-tv-profile) .sf-detail-stage{position:relative;inset:auto;height:min(64vw,52vh)}
+  html:not(.safafi-tv-profile) .sf-detail-stage .sf-img,html:not(.safafi-tv-profile) .sf-detail-stage .sf-artwork-fallback{width:100%!important;height:100%!important;left:0!important;right:0!important}
+  html:not(.safafi-tv-profile) .sf-detail-stage .sf-stage-scrim{background:linear-gradient(to top,var(--sf-bg) 3%,rgba(11,11,14,.45) 45%,rgba(11,11,14,0) 75%)!important}
+  html:not(.safafi-tv-profile) .sf-detail-copy{width:auto;margin:-36px 16px 0;gap:10px}
+  html:not(.safafi-tv-profile) .sf-detail-copy h1{font-size:30px;line-height:1.1}
+  html:not(.safafi-tv-profile) .sf-tagline{font-size:14px;margin:0}
+  html:not(.safafi-tv-profile) .sf-detail-copy .sf-synopsis{-webkit-line-clamp:6}
+  html:not(.safafi-tv-profile) .sf-credits{font-size:12px;-webkit-line-clamp:2}
+  html:not(.safafi-tv-profile) .sf-detail-copy .sf-actions{width:100%;margin-top:6px}
+  html:not(.safafi-tv-profile) .sf-detail-copy .sf-actions>*{flex:1 1 auto}
+  html:not(.safafi-tv-profile) .sf-detail-copy .sf-actions>.sf-primary{flex-basis:100%}
+  html:not(.safafi-tv-profile) .sf-resume{font-size:12px;gap:10px}html:not(.safafi-tv-profile) .sf-resume-bar{width:120px;height:4px}
+  html:not(.safafi-tv-profile) .sf-detail-rows{margin-top:14px;gap:8px;padding-bottom:24px}
+  html:not(.safafi-tv-profile) [data-safafi-seasons] h3,html:not(.safafi-tv-profile) [data-safafi-episodes] h3{font-size:18px!important}
+  html:not(.safafi-tv-profile) [data-safafi-seasons] span,html:not(.safafi-tv-profile) [data-safafi-episodes]>div:first-child span{font-size:12px!important}
+  html:not(.safafi-tv-profile) [data-safafi-seasons] button,html:not(.safafi-tv-profile) [data-safafi-episodes] [class*="overflow-x-auto"] button{height:36px;min-height:36px!important;padding:0 14px!important}
+  html:not(.safafi-tv-profile) [data-safafi-seasons] button span{font-size:13px!important}
+  html:not(.safafi-tv-profile) [data-safafi-episodes] .grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px!important}
+  html:not(.safafi-tv-profile) [data-safafi-episodes] .grid>a{height:44px;min-height:44px}
+  html:not(.safafi-tv-profile) [data-safafi-episodes] .grid>a span{font-size:14px!important}
+  html:not(.safafi-tv-profile) .sf-season-block>[class*="p-4"]{margin:0 16px;padding:14px 16px!important;font-size:14px!important}
+  html:not(.safafi-tv-profile) .sf-rail[data-kind="episodes"] .sf-rail-track{gap:12px}
+  html:not(.safafi-tv-profile) .sf-episode-card{width:72vw;gap:8px}
+  html:not(.safafi-tv-profile) .sf-episode-number{top:8px;inset-inline-start:8px;min-width:30px;height:30px;padding:0 8px;font-size:14px;border-radius:8px}
+  html:not(.safafi-tv-profile) .sf-episode-flag{bottom:8px;inset-inline-start:8px;padding:3px 10px;font-size:11px}
+  html:not(.safafi-tv-profile) .sf-episode-copy h3{font-size:15px}
+  html:not(.safafi-tv-profile) .sf-episode-meta{font-size:12px}
+  html:not(.safafi-tv-profile) .sf-episode-copy p{font-size:13px}
+  html:not(.safafi-tv-profile) .sf-person{width:92px;gap:6px}
+  html:not(.safafi-tv-profile) .sf-person-photo{width:80px;height:80px}
+  html:not(.safafi-tv-profile) .sf-person strong{font-size:12px}html:not(.safafi-tv-profile) .sf-person span{font-size:11px}
+
+  /* Search: the phone's own keyboard replaces the on-screen one */
+  html:not(.safafi-tv-profile) .sf-search{display:block;padding-top:8px}
+  html:not(.safafi-tv-profile) .sf-search-panel{position:static;gap:12px;margin-bottom:16px}
+  html:not(.safafi-tv-profile) .sf-search-form{height:52px;padding-inline-start:14px;border-radius:14px}
+  html:not(.safafi-tv-profile) .sf-search-form input{font-size:17px}
+  html:not(.safafi-tv-profile) .sf-search-form .sf-icon-button{width:38px;height:38px}
+  html:not(.safafi-tv-profile) .sf-results-title{font-size:18px}html:not(.safafi-tv-profile) .sf-results-title span{font-size:13px}
+  html:not(.safafi-tv-profile) .sf-search-warning{font-size:13px;padding:10px 14px}
+  html:not(.safafi-tv-profile) .sf-sort{font-size:13px}
+  html:not(.safafi-tv-profile) .sf-sort select,html:not(.safafi-tv-profile) .sf-setting select{height:38px;padding:0 14px;font-size:14px}
+  html:not(.safafi-tv-profile) .sf-pagination button{min-width:38px;height:38px;font-size:14px!important}
+
+  /* Settings */
+  html:not(.safafi-tv-profile) .sf-settings-section{margin-bottom:22px}
+  html:not(.safafi-tv-profile) .sf-settings-section header h2{font-size:12px;margin-bottom:8px}
+  html:not(.safafi-tv-profile) .sf-settings-fields{padding:4px;border-radius:16px}
+  html:not(.safafi-tv-profile) .sf-setting{gap:12px;min-height:58px;padding:10px 12px;font-size:15px;border-radius:12px}
+  html:not(.safafi-tv-profile) .sf-setting small{font-size:12px}
+  html:not(.safafi-tv-profile) .sf-setting select{min-width:0;max-width:46vw}
+  html:not(.safafi-tv-profile) .sf-toggle b{width:48px;height:28px;border-radius:14px}
+  html:not(.safafi-tv-profile) .sf-toggle b i{top:4px;inset-inline-start:4px;width:20px;height:20px}
+  html:not(.safafi-tv-profile)[dir="rtl"] .sf-toggle[aria-checked="true"] b i,html:not(.safafi-tv-profile) [dir="rtl"] .sf-toggle[aria-checked="true"] b i{transform:translateX(-20px)}
+  html:not(.safafi-tv-profile) [dir="ltr"] .sf-toggle[aria-checked="true"] b i{transform:translateX(20px)}
+  html:not(.safafi-tv-profile) .sf-about{font-size:14px;padding:6px 12px}
+  html:not(.safafi-tv-profile) .sf-diagnostics{font-size:12px}
+
+  /* Catalog screens (movies / series / anime) */
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="movies"],html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="series"],html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="anime"]{padding:20px 0 32px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="movies"] h1,html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="series"] h1{font-size:28px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="movies"]>div:first-child p,html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="series"]>div:first-child p{font-size:14px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] [title="Categorized rails"],html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] [title="Full poster grid"]{height:36px;padding:0 14px!important;font-size:13px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] form:not(.sf-search-form){height:48px;padding-inline-start:14px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] form:not(.sf-search-form) input{font-size:16px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] form:not(.sf-search-form) svg{width:20px!important;height:20px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] form:not(.sf-search-form) button{height:36px;padding:0 14px!important;font-size:14px!important}
+  html:not(.safafi-tv-profile) [data-testid="discovery-filter-bar"]>div:first-child,html:not(.safafi-tv-profile) [data-testid="discovery-filter-bar"]>div:first-child span,html:not(.safafi-tv-profile) [data-testid="discovery-filter-bar"] [data-testid="filter-reset-btn"] span{font-size:13px!important}
+  html:not(.safafi-tv-profile) [data-testid="discovery-filter-bar"] .grid{gap:8px!important}
+  html:not(.safafi-tv-profile) [data-testid="discovery-filter-bar"] select{min-width:0;flex:1 1 40%;height:40px!important;min-height:40px!important;padding:0 14px!important;font-size:13px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] .space-y-4 h2{font-size:18px!important}
+  html:not(.safafi-tv-profile) .sf-content .grid:not(.sf-grid):not(.sf-keyboard):not([data-testid] .grid):not([data-safafi-episodes] .grid){grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px 10px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] [class*="rounded-2xl"][class*="text-center"]{padding:22px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] [class*="rounded-2xl"][class*="text-center"] p{font-size:14px!important}
+  html:not(.safafi-tv-profile) .sf-content [class*="sticky top-14"]>div{padding:14px 16px 0!important}
+  html:not(.safafi-tv-profile) .sf-content [class*="sticky top-14"] span,html:not(.safafi-tv-profile) .sf-content [class*="sticky top-14"] button{font-size:13px!important}
+  html:not(.safafi-tv-profile) .sf-content [class*="sticky top-14"] button{height:36px;padding:0 14px!important}
+
+  /* Toast */
+  html:not(.safafi-tv-profile) .sf-toast{bottom:calc(76px + env(safe-area-inset-bottom));font-size:14px}
+}
+/* Up Next card on phones */
+@media (max-width:900px){html:not(.safafi-tv-profile) .sf-upnext{zoom:.5;bottom:40px}html:not(.safafi-tv-profile) .sf-upnext[dir="rtl"]{right:32px}html:not(.safafi-tv-profile) .sf-upnext[dir="ltr"]{left:32px}}
+@media (max-width:480px){html:not(.safafi-tv-profile) .sf-upnext{zoom:.42;width:calc((100vw - 32px) / .42);right:16px!important;left:auto!important}html:not(.safafi-tv-profile) .sf-upnext-art{width:220px}}
+
+/* ---------- Phone billboard: poster card ---------- */
+.sf-hero-poster{display:none}
+@media (max-width:760px){
+  html:not(.safafi-tv-profile) .sf-hero{padding-top:calc(18px + env(safe-area-inset-top))}
+  html:not(.safafi-tv-profile) .sf-hero>.sf-stage{opacity:.5}
+  html:not(.safafi-tv-profile) .sf-hero .sf-stage-scrim{background:linear-gradient(to top,var(--sf-bg) 4%,rgba(11,11,14,.6) 40%,rgba(11,11,14,.35) 100%)!important}
+  html:not(.safafi-tv-profile) .sf-hero-poster{display:block;position:relative;z-index:1;width:min(66vw,300px);aspect-ratio:2/3;margin:0 auto 16px;border-radius:14px;overflow:hidden;background:var(--sf-raised);box-shadow:0 18px 48px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08);animation:sf-fade 320ms var(--sf-ease) backwards}
+  html:not(.safafi-tv-profile) .sf-hero-poster .sf-img,html:not(.safafi-tv-profile) .sf-hero-poster .sf-artwork-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  html:not(.safafi-tv-profile) .sf-hero-copy h1{font-size:26px}
+  html:not(.safafi-tv-profile) .sf-hero-copy .sf-synopsis{-webkit-line-clamp:2}
+  html:not(.safafi-tv-profile) .sf-hero-copy .sf-eyebrow{display:none}
+}
+
+/* ---------- Catalog / anime search forms and anime developer bar on the web ---------- */
+html:not(.safafi-tv-profile) .sf-content [class*="sticky top-14"]{display:none!important}
+@media (max-width:760px){
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] form:not(.sf-search-form){width:auto!important;max-width:none!important;margin:0 16px!important;gap:8px;box-sizing:border-box}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] form:not(.sf-search-form) input{flex:1 1 auto;min-width:0;width:auto!important;padding:0 8px!important}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] form:not(.sf-search-form) button{flex:none;background:var(--sf-glass)!important;color:#fff!important;font-family:var(--sf-font)!important}
+}
+
+/* ---------- Web back button on inner screens ---------- */
+.sf-web-back{position:fixed;top:calc(14px + env(safe-area-inset-top));z-index:70;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:rgba(11,11,14,.72);color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.4);cursor:pointer}
+.sf-app[dir="rtl"] .sf-web-back{right:calc(var(--sf-nav) + 16px)}.sf-app[dir="ltr"] .sf-web-back{left:calc(var(--sf-nav) + 16px)}
+@media (hover:hover){.sf-web-back:hover{background:#fff;color:#0b0b0e}}
+html.safafi-stage-open .sf-web-back{display:none}
+
+/* ---------- Notch / status bar safe areas (installed app on iPhone) ---------- */
+@media (max-width:760px){
+  html:not(.safafi-tv-profile) .sf-page{padding-top:calc(24px + env(safe-area-inset-top))}
+  html:not(.safafi-tv-profile) .sf-search{padding-top:calc(8px + env(safe-area-inset-top))}
+  html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="movies"],html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="series"],html:not(.safafi-tv-profile) .sf-content [data-safafi-screen="anime"]{padding-top:calc(20px + env(safe-area-inset-top))!important}
+}
+html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] form:not(.sf-search-form) button,html:not(.safafi-tv-profile) .sf-content [data-safafi-screen] form:not(.sf-search-form) svg{translate:none!important}
+
+/* ---------- Phones held sideways: the computer layout, scaled to the short screen ---------- */
+@media (pointer:coarse) and (max-height:500px) and (min-width:761px){
+  html:not(.safafi-tv-profile) .sf-app{zoom:.56}
+  html:not(.safafi-tv-profile) .sf-web-back{width:76px;height:76px;top:24px}html:not(.safafi-tv-profile) .sf-web-back .sf-icon{width:40px;height:40px}
+}

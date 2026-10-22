@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ar">
+
+<head>
+<script src="./web-config.js"></script>
+<script src="./perf-probe.js"></script>
+<script src="./settings-state.js"></script>
+<script src="./progress-state.js"></script>
+<script src="./logical-navigation.js"></script>
+<script src="./library-state.js"></script>
+<script src="./artwork.js"></script>
+<script src="./player-source.js"></script>
+<script src="./player-stage.js"></script>
+<script src="./player-input.js"></script>
+<script src="./native-playback.js"></script>
+<script src="./samsung-runtime.js"></script>
+<script src="./tv-navigation.js"></script>
+<script src="./tv-adapter.js"></script>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="./branding/safafi-mark.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Safafi" />
+  <meta name="theme-color" content="#0b0b0e" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+  <title>Safafi Cinema</title>
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@Safafi Cinema" />
+  <meta name="twitter:creator" content="@Safafi Cinema" />
+  <script>
+    window.__onGCastApiAvailable = function (isAvailable) {
+      if (isAvailable && window.cast && window.cast.framework) {
+        try {
+          const appId = (window.chrome && window.chrome.cast && window.chrome.cast.media && window.chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID) || 'CC1AD845';
+          const autoJoin = (window.chrome && window.chrome.cast && window.chrome.cast.AutoJoinPolicy && window.chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED) || 'origin_scoped';
+          window.cast.framework.CastContext.getInstance().setOptions({
+            receiverApplicationId: appId,
+            autoJoinPolicy: autoJoin
+          });
+        } catch (e) {
+          console.warn('Cast context init warning:', e);
+        }
+      }
+    };
+  </script>
+  <script>if(!window.SafafiPlatform.tv){var castScript=document.createElement("script");castScript.src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1";document.head.appendChild(castScript);}</script>
+  <script type="module" crossorigin src="./assets/index-D1L259q0.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Ct0G_dhG.js">
+  <link rel="modulepreload" crossorigin href="./assets/config-DuQEQKG4.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-DAlGq3hj.css">
+<script src="./web-app.js" defer></script>
+<script src="./ui-sounds.js" defer></script>
+<script src="./experience-core.js" defer></script>
+<script src="./experience-media.js" defer></script>
+<script src="./experience-controller.js" defer></script>
+<script src="./player-controls.js" defer></script>
+<script src="./subtitle-languages.js" defer></script>
+<script src="./player-panels.js" defer></script>
+<script src="./tv-shell.js" defer></script>
+<script src="./screen-controls.js" defer></script>
+<link rel="stylesheet" href="./ui/safafi.css">
+</head>
+
+<body>
+  <div id="safafi-startup" class="sf-intro" dir="rtl" aria-live="polite"><div class="sf-intro-stage" aria-hidden="true"><i class="sf-intro-glow"></i><i class="sf-intro-ribbon r1"></i><i class="sf-intro-ribbon r2"></i><i class="sf-intro-ribbon r3"></i><span class="sf-intro-mark"><img src="./branding/safafi-splash.jpg" width="168" height="168" alt="" fetchpriority="high"><i class="sf-intro-flare"></i></span><span class="sf-intro-word" dir="ltr"><b>SAFAFI</b><small>CINEMA</small></span></div><p>جارٍ تجهيز السينما…</p><div class="safafi-startup-progress"></div><button hidden type="button">إعادة المحاولة</button></div>
+  <div id="root"></div>
+
+</body>
+
+</html>
+
+

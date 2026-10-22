@@ -1,0 +1,198 @@
+/* Playback controls are a single explicit focus graph (player-controls.js); the original React owner
+   keeps rendering provider/settings panels and owns all media state. Safafi Cinema 3.0 player skin. */
+[data-safafi-player-host] [data-safafi-legacy-toolbar]{visibility:hidden!important;pointer-events:none!important;opacity:1!important;z-index:200!important}
+[data-safafi-legacy-toolbar] [role="menu"],
+[data-safafi-legacy-toolbar] [role="dialog"],
+[data-safafi-legacy-toolbar] [role="listbox"]{visibility:visible!important;pointer-events:auto!important;z-index:200!important}
+[data-safafi-legacy-toolbar] [role="menu"] button,
+[data-safafi-legacy-toolbar] [role="dialog"] button{pointer-events:auto!important}
+[data-safafi-player-host]{isolation:isolate}
+[data-safafi-player-host] [data-safafi-legacy-toolbar] *{visibility:hidden!important}
+[data-safafi-player-host] [data-safafi-legacy-toolbar] [role="menu"],[data-safafi-player-host] [data-safafi-legacy-toolbar] [role="menu"] *,[data-safafi-player-host] [data-safafi-legacy-toolbar] [role="dialog"],[data-safafi-player-host] [data-safafi-legacy-toolbar] [role="dialog"] *,[data-safafi-player-host] [data-safafi-legacy-toolbar] [role="listbox"],[data-safafi-player-host] [data-safafi-legacy-toolbar] [role="listbox"] *{visibility:visible!important}
+[data-safafi-player-host] [role="banner"]{visibility:hidden!important;pointer-events:none!important}
+[data-safafi-player-host] button.rounded-full[class*="bg-black/40"]{display:none!important}
+#safafi-player-controls{
+ position:absolute;inset:0;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;
+ padding:0;color:#f5f5f7;pointer-events:none;opacity:1;visibility:visible;transition:opacity 220ms cubic-bezier(.22,.61,.36,1),visibility 0s;
+ font-family:"SamsungOneUI","SamsungOne","Tizen Sans","Segoe UI",Inter,system-ui,Tahoma,Arial,sans-serif;-webkit-font-smoothing:antialiased
+}
+#safafi-player-controls>*{pointer-events:auto}
+.sc-player-top{display:flex;align-items:center;gap:20px;padding:44px 72px 120px;background:linear-gradient(rgba(0,0,0,.78),rgba(0,0,0,.35) 55%,transparent)}
+.sc-player-brand{flex:none;width:10px;height:34px;border-radius:3px;background:linear-gradient(#ff3d5f,#8f0a23);transform:skewX(-14deg)}
+#safafi-player-controls .sc-player-title{font-size:34px;font-weight:700;line-height:1.2;text-align:start;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+.sc-player-bottom{display:flex;flex-direction:column;gap:18px;padding:140px 72px 48px;background:linear-gradient(transparent,rgba(0,0,0,.55) 38%,rgba(0,0,0,.88))}
+.sc-player-timeline-row{display:flex;align-items:center;gap:28px;direction:ltr;min-height:44px}
+#safafi-player-controls .sc-player-timeline{flex:1;min-width:0;width:100%;direction:ltr;height:44px;margin:0;cursor:pointer;scroll-margin:16px;-webkit-appearance:none;appearance:none;background:transparent;border:0;border-radius:8px;outline:none}
+#safafi-player-controls .sc-player-timeline::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:linear-gradient(to right,#e91038 var(--sc-progress,0%),rgba(255,255,255,.3) var(--sc-progress,0%));transition:height 160ms}
+#safafi-player-controls .sc-player-timeline::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-8px;border:0;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.5);transform:scale(.0001);transition:transform 160ms cubic-bezier(.16,1,.3,1)}
+#safafi-player-controls .sc-player-timeline:focus::-webkit-slider-runnable-track{height:10px}
+#safafi-player-controls .sc-player-timeline:focus::-webkit-slider-thumb{transform:scale(1.25);margin-top:-6px;box-shadow:0 0 0 6px rgba(255,255,255,.25),0 2px 10px rgba(0,0,0,.5)}
+.safafi-controls-active #safafi-player-controls .sc-player-timeline::-webkit-slider-thumb{transform:scale(1)}
+#safafi-player-controls .sc-player-timeline::-moz-range-track{height:6px;border:0;border-radius:6px;background:rgba(255,255,255,.3)}
+#safafi-player-controls .sc-player-timeline::-moz-range-progress{height:6px;border-radius:6px;background:#e91038}
+#safafi-player-controls .sc-player-timeline::-moz-range-thumb{width:20px;height:20px;border:0;border-radius:50%;background:#fff}
+.sc-player-remaining{direction:ltr;unicode-bidi:isolate;flex:none;min-width:120px;font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;color:rgba(245,245,247,.86)}
+.sc-player-playback-row,.sc-player-tools-row{display:flex;align-items:center;gap:14px;min-width:0;direction:ltr}
+.sc-player-tools-row{justify-content:flex-start;padding-top:4px}
+#safafi-player-controls .sc-player-action{
+ position:relative;display:inline-flex;flex:none;align-items:center;justify-content:center;gap:12px;min-height:64px;min-width:64px;
+ padding:0 26px;border:0;border-radius:999px;background:rgba(255,255,255,.12);color:#f5f5f7;font:600 22px/1.2 inherit;font-family:inherit;
+ cursor:pointer;white-space:nowrap;box-shadow:none;transition:transform 150ms cubic-bezier(.22,.61,.36,1),background-color 150ms,color 150ms
+}
+#safafi-player-controls .sc-player-icon-only{width:76px;height:76px;padding:0;background:transparent}
+#safafi-player-controls [data-player-action="play"]{width:88px;height:88px;background:rgba(255,255,255,.14)}
+#safafi-player-controls [data-player-action="play"] svg{width:40px;height:40px}
+#safafi-player-controls .sc-player-icon-only svg{width:36px;height:36px}
+#safafi-player-controls [data-player-action="play"] .sc-i-pause,#safafi-player-controls [data-player-action="play"][data-playing="true"] .sc-i-play{display:none}
+#safafi-player-controls [data-player-action="play"][data-playing="true"] .sc-i-pause{display:inline}
+#safafi-player-controls .sc-player-action:focus{outline:none!important;background:#f5f5f7!important;color:#0b0b0e!important;transform:scale(1.1)}
+#safafi-player-controls .sc-player-action[aria-expanded="true"]{box-shadow:inset 0 0 0 2px #e91038}
+#safafi-player-controls .sc-player-action:active{transform:scale(.96)}
+#safafi-player-controls .sc-player-glyph{display:flex;line-height:1}
+#safafi-player-controls .sc-player-glyph svg{display:block}
+#safafi-player-controls .sc-player-icon-only .sc-player-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+#safafi-player-controls .sc-player-time{flex:1;min-width:120px;padding-inline:20px;font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;direction:ltr;text-align:left;white-space:nowrap;color:rgba(245,245,247,.86)}
+#safafi-player-controls .sc-player-label{max-width:260px;overflow:hidden;text-overflow:ellipsis}
+.safafi-controls-hidden #safafi-player-controls{opacity:0;pointer-events:none;visibility:hidden;transition:opacity 420ms cubic-bezier(.22,.61,.36,1),visibility 0s linear 420ms}
+.safafi-controls-hidden #safafi-player-controls>*{pointer-events:none}
+.safafi-controls-active #safafi-player-controls{opacity:1;visibility:visible}
+#safafi-player-controls [hidden]{display:none!important}
+#safafi-player-controls[data-panel-open="true"]{opacity:0!important;pointer-events:none!important;visibility:hidden!important}
+.safafi-controls-hidden [data-safafi-player-toolbar]{opacity:0;pointer-events:none}
+.safafi-controls-active [data-safafi-player-toolbar]{opacity:1}
+.sc-player-extras{position:fixed;top:40px;bottom:40px;right:40px;left:auto;z-index:400;width:560px;max-width:calc(100vw - 80px);box-sizing:border-box;overflow-y:auto;scroll-padding:16px;padding:32px;background:rgba(18,18,23,.98);border:1px solid rgba(255,255,255,.1);border-radius:28px;color:#f5f5f7;font:22px/1.5 "SamsungOneUI","SamsungOne","Segoe UI",Inter,system-ui,Tahoma,Arial,sans-serif;display:flex;flex-direction:column;gap:10px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:sf-slide-in 240ms cubic-bezier(.16,1,.3,1) both}
+.sc-player-extras h2{font-size:32px;font-weight:800;margin:0 0 8px}
+.sc-player-extras .sc-player-action{min-height:72px;width:100%;padding:0 22px;border-radius:14px;background:transparent;color:#f5f5f7;border:0;font:inherit;font-weight:600;cursor:pointer;flex-shrink:0;text-align:start;transition:background-color 120ms,color 120ms}
+.sc-player-extras .sc-player-action:focus,.sc-player-extras input:focus{outline:none!important;background:#f5f5f7;color:#0b0b0e}
+.sc-player-extras input[type="range"]{width:100%;min-height:64px;accent-color:#e91038;direction:ltr;border-radius:14px}
+.sc-player-volume-label{display:flex;flex-direction:column;gap:6px;padding:8px 22px;color:rgba(245,245,247,.7)}
+.sc-player-extras .sc-player-extra-status{font-size:20px;margin:0;color:rgba(245,245,247,.7)}
+[data-safafi-stage]{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-width:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;aspect-ratio:auto!important;z-index:100000!important;background:black!important}
+[data-safafi-stage]>iframe[data-testid="player-iframe"]{width:100%!important;height:100%!important;display:block!important}
+[data-safafi-stage-ancestor]{transform:none!important;filter:none!important;backdrop-filter:none!important;perspective:none!important;contain:none!important;will-change:auto!important;z-index:auto!important;opacity:1!important;isolation:auto!important;clip-path:none!important;overflow:visible!important;content-visibility:visible!important}
+html.safafi-stage-open,html.safafi-stage-open body{overflow:hidden!important}
+@media(max-width:1100px){.sc-player-top{padding:28px 32px 80px}.sc-player-bottom{padding:80px 32px 28px;gap:12px}#safafi-player-controls .sc-player-action{min-height:52px;padding:0 16px;font-size:18px}#safafi-player-controls .sc-player-icon-only{width:56px;height:56px}#safafi-player-controls [data-player-action="play"]{width:64px;height:64px}#safafi-player-controls .sc-player-title{font-size:24px}}
+@media(max-width:700px){.sc-player-tools-row{flex-wrap:wrap}#safafi-player-controls .sc-player-label{max-width:120px}#safafi-player-controls .sc-player-time,.sc-player-remaining{font-size:15px;min-width:64px}}
+@media(prefers-reduced-motion:reduce){#safafi-player-controls,#safafi-player-controls .sc-player-action,.sc-player-extras{transition:none!important;animation:none!important;transform:none!important}}
+html[data-motion="reduced"] #safafi-player-controls,html[data-motion="reduced"] .sc-player-action,html[data-motion="reduced"] .sc-player-extras{transition:none!important;animation:none!important;transform:none!important}
+/* Media selection panels (player-panels.js): subtitles, quality, audio, servers. Focus never leaves the list;
+   the option list is the only scroller so long track lists stay reachable with the remote. */
+.sf-media-panel{position:absolute;top:40px;bottom:40px;right:40px;left:auto;z-index:250;width:600px;max-width:calc(100% - 80px);box-sizing:border-box;padding:32px;display:flex;flex-direction:column;gap:18px;overflow:hidden;background:rgba(18,18,23,.98);border:1px solid rgba(255,255,255,.1);border-radius:28px;color:#f5f5f7;box-shadow:0 30px 80px rgba(0,0,0,.6);font-family:"SamsungOneUI","SamsungOne","Tizen Sans","Segoe UI",Inter,system-ui,Tahoma,Arial,sans-serif;animation:sf-slide-in 220ms cubic-bezier(.16,1,.3,1) both}
+[dir="ltr"].sf-media-panel{right:40px}
+.sf-media-panel h2{margin:0;font-size:32px;font-weight:800}
+.sf-media-panel>button{align-self:flex-start;min-height:60px;padding:0 26px;border:0;border-radius:999px;background:rgba(255,255,255,.12);color:#f5f5f7;font:600 22px/1.2 inherit;font-family:inherit}
+.sf-media-panel>button:focus{outline:none;background:#f5f5f7;color:#0b0b0e}
+.sf-media-options{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:6px;padding:6px;margin:-6px;scroll-behavior:auto}
+.sf-media-options button{flex-shrink:0;min-height:72px;padding:14px 22px;border:0;border-radius:14px;background:transparent;color:#f5f5f7;font:600 23px/1.4 inherit;font-family:inherit;text-align:start;white-space:normal}
+.sf-media-options button[aria-checked="true"]{background:rgba(233,16,56,.16);box-shadow:inset 4px 0 0 #e91038}
+[dir="rtl"] .sf-media-options button[aria-checked="true"]{box-shadow:inset -4px 0 0 #e91038}
+.sf-media-options button:focus{outline:none;background:#f5f5f7;color:#0b0b0e}
+.sf-media-options button:disabled{opacity:.45}
+.sf-media-options button>span,.sf-media-options button>small{display:block}
+.sf-media-options button>small{margin-top:4px;font-size:19px;font-weight:500;color:rgba(245,245,247,.62)}
+.sf-media-options button:focus>small{color:rgba(11,11,14,.65)}
+.sf-media-note{padding:12px 16px;font-size:21px;line-height:1.5;color:rgba(245,245,247,.62)}
+html[data-motion="reduced"] .sf-media-panel{animation:none}
+.sf-panel-owned [data-safafi-legacy-panel],[data-sf-panel-owned] [data-safafi-legacy-panel]{display:none!important}
+/* Native playback (AVPlay): the TV draws video on a hardware plane beneath the page, so every layer above
+   the video area must be transparent while the controls and panels stay visible. */
+html.sf-native-playback,html.sf-native-playback body,html.sf-native-playback #root{background:transparent!important}
+html.sf-native-playback [data-safafi-player-host],html.sf-native-playback [data-safafi-player-host] [class*="bg-black"]:not([data-testid]),html.sf-native-playback #root>div,html.sf-native-playback #root>div>div,html.sf-native-playback #video-aspect-container{background:transparent!important}
+html.sf-native-playback video{opacity:0!important}
+html.sf-native-playback img[alt="Show Backdrop"]{display:none!important}
+html.sf-native-host,html.sf-native-host body,html.sf-native-host .sf-app,html.sf-native-host .sf-content{background:transparent!important}
+html.sf-native-host .sf-app{visibility:hidden}
+html.sf-native-host [data-safafi-stage],html.sf-native-host [data-safafi-stage] iframe{visibility:visible;background:transparent!important}
+
+/* ---------- Up Next card (over the fullscreen player) ---------- */
+.sf-upnext{position:fixed;bottom:72px;z-index:100040;display:flex;align-items:stretch;gap:28px;width:880px;padding:26px;border-radius:24px;background:rgba(14,14,18,.94);box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.08);color:#fff;font-family:var(--sf-font);opacity:0;transform:translateY(24px);transition:opacity 260ms var(--sf-ease),transform 320ms var(--sf-ease-out)}
+.sf-upnext[dir="rtl"]{right:72px}.sf-upnext[dir="ltr"]{left:72px}
+.sf-upnext.is-in{opacity:1;transform:none}
+.sf-upnext-art{flex:none;width:300px;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#1d1d25,#15151b)}
+.sf-upnext-art img{display:block;width:100%;height:100%;object-fit:cover}
+.sf-upnext-body{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;flex:1}
+.sf-upnext .sf-eyebrow{font-size:18px}
+.sf-upnext h3{margin:0;font-size:32px;font-weight:800;line-height:1.2}
+.sf-upnext-title{margin:0;font-size:22px;color:var(--sf-text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.sf-upnext-status{margin:2px 0 0;font-size:19px;color:var(--sf-text-3)}
+.sf-upnext.is-counting .sf-upnext-status{color:#fff;font-weight:700}
+.sf-upnext-bar{width:100%;height:5px;border-radius:5px;background:rgba(255,255,255,.14);overflow:hidden;visibility:hidden}
+.sf-upnext.is-counting .sf-upnext-bar{visibility:visible}
+.sf-upnext-bar i{display:block;height:100%;width:0;background:var(--sf-brand);transition:width 1s linear}
+.sf-upnext-actions{display:flex;gap:16px;margin-top:10px}
+.sf-upnext .sf-button{height:60px;padding:0 28px;font-size:22px}
+@media(prefers-reduced-motion:reduce){.sf-upnext,.sf-upnext-bar i{transition:none}}
+
+/* ---------- Subtitles (TV scale) ---------- */
+.sf-subtitle{z-index:61!important;padding:4px 18px 6px;border-radius:10px;font-family:var(--sf-font);font-weight:600;letter-spacing:0;white-space:normal;transition:bottom 240ms var(--sf-ease)}
+.sf-subtitle[data-bg="none"]{text-shadow:0 0 6px #000,0 2px 3px #000,0 0 2px #000!important}
+html.safafi-controls-active .sf-subtitle[data-pos="bottom"]{bottom:300px!important}
+html.safafi-controls-active .sf-subtitle[data-pos="mid"]{bottom:340px!important}
+
+/* ---------- Subtitle appearance panel ---------- */
+.sf-style-panel{width:760px}
+.sf-style-back{display:flex}
+.sf-style-back>button{min-height:60px;padding:0 26px;border:0;border-radius:999px;background:rgba(255,255,255,.12);color:#f5f5f7;font:600 22px/1.2 inherit;font-family:inherit}
+.sf-style-back>button:focus{outline:none;background:#f5f5f7;color:#0b0b0e}
+.sf-style-preview{position:relative;flex:none;height:150px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3a2a4d,#1d3b52 55%,#5a3a2a);display:flex;justify-content:center;align-items:flex-end;padding:16px}
+.sf-style-preview[data-pos="top"]{align-items:flex-start}.sf-style-preview[data-pos="mid"]{align-items:center}
+.sf-style-preview span{padding:3px 14px 5px;border-radius:8px;font-weight:600;line-height:1.3;text-align:center}
+.sf-style-row{display:flex;flex-direction:column;gap:10px;padding:6px 0 10px;border-bottom:1px solid rgba(255,255,255,.07)}
+.sf-style-row:last-child{border-bottom:0}
+.sf-style-row h3{margin:0;display:flex;justify-content:space-between;gap:16px;font-size:20px;font-weight:700;color:var(--sf-text-2,#b9b9c2)}
+.sf-style-value{font-weight:600;color:#fff}
+.sf-style-choices{display:flex;flex-wrap:wrap;gap:10px}
+.sf-media-options .sf-style-choices button{min-height:58px;padding:0 22px;border-radius:12px;background:rgba(255,255,255,.08);text-align:center;font-size:21px}
+.sf-media-options .sf-style-choices button[aria-checked="true"]{background:rgba(233,16,56,.22);box-shadow:inset 0 0 0 2px #e91038}
+.sf-media-options .sf-style-choices button:focus{background:#f5f5f7;color:#0b0b0e;box-shadow:none}
+[data-sf-panel-owned] .sf-subtitle{left:calc((100% - 840px) / 2)!important;max-width:calc(100% - 920px)!important}
+
+/* ---------- Web (phones/computers): controls scaled to the window ---------- */
+html:not(.safafi-tv-profile) #safafi-player-controls{zoom:var(--sf-ui-zoom,1)}
+html:not(.safafi-tv-profile) .sf-media-panel,html:not(.safafi-tv-profile) .sc-player-extras{zoom:var(--sf-panel-zoom,1);top:16px;bottom:16px;right:16px;max-width:calc(100vw / var(--sf-panel-zoom,1) - 32px)}
+html:not(.safafi-tv-profile).safafi-controls-active .sf-subtitle[data-pos="bottom"]{bottom:calc(300px * var(--sf-ui-zoom,1))!important}
+html:not(.safafi-tv-profile).safafi-controls-active .sf-subtitle[data-pos="mid"]{bottom:calc(340px * var(--sf-ui-zoom,1))!important}
+html:not(.safafi-tv-profile) [data-sf-panel-owned] .sf-subtitle{left:50%!important;max-width:88%!important}
+html:not(.safafi-tv-profile) #safafi-player-controls .sc-player-back{background:transparent}
+@media (max-aspect-ratio:1/1){
+  html:not(.safafi-tv-profile) #safafi-player-controls .sc-player-tools-row .sc-player-label,
+  html:not(.safafi-tv-profile) #safafi-player-controls [data-player-action="fullscreen"] .sc-player-label,
+  html:not(.safafi-tv-profile) #safafi-player-controls [data-player-action="episodes"] .sc-player-label{display:none}
+  html:not(.safafi-tv-profile) #safafi-player-controls .sc-player-tools-row .sc-player-action,
+  html:not(.safafi-tv-profile) #safafi-player-controls [data-player-action="fullscreen"],
+  html:not(.safafi-tv-profile) #safafi-player-controls [data-player-action="episodes"]{padding:0;width:76px;height:76px}
+  html:not(.safafi-tv-profile) #safafi-player-controls .sc-player-time{min-width:0;padding-inline:10px}
+  html:not(.safafi-tv-profile) .sc-player-top{padding:44px 40px 80px}
+  html:not(.safafi-tv-profile) .sc-player-bottom{padding:100px 40px 60px}
+  html:not(.safafi-tv-profile).safafi-controls-active .sf-subtitle[data-pos="bottom"]{bottom:calc(330px * var(--sf-ui-zoom,1))!important}
+}
+html:not(.safafi-tv-profile) .sc-player-tools-row{flex-wrap:wrap}
+/* Web: the panels' font shorthand ("… inherit") is invalid, so set the intended sizes explicitly. */
+html:not(.safafi-tv-profile) .sf-media-panel button,html:not(.safafi-tv-profile) .sc-player-extras button{font-family:inherit;font-weight:600}
+html:not(.safafi-tv-profile) .sf-media-options button{font-size:24px;line-height:1.4;min-height:76px}
+html:not(.safafi-tv-profile) .sf-media-panel>button,html:not(.safafi-tv-profile) .sf-style-back>button{font-size:22px}
+html:not(.safafi-tv-profile) .sf-media-note{font-size:22px}
+html:not(.safafi-tv-profile) #safafi-player-controls .sc-player-action{font-size:22px;font-family:inherit;font-weight:600}
+@media (pointer:coarse){
+  html:not(.safafi-tv-profile) .sf-media-panel h2{font-size:38px}
+  html:not(.safafi-tv-profile) .sf-media-options button{font-size:30px;min-height:88px;padding:14px 26px}
+  html:not(.safafi-tv-profile) .sf-media-panel>button,html:not(.safafi-tv-profile) .sf-style-back>button{font-size:27px;min-height:66px;padding:0 30px}
+  html:not(.safafi-tv-profile) .sf-media-note{font-size:26px}
+  html:not(.safafi-tv-profile) .sf-media-options .sf-style-choices button{font-size:27px;min-height:70px}
+  html:not(.safafi-tv-profile) .sf-style-row h3{font-size:26px}
+}
+
+/* ---------- Web phones: subtitle width, portrait placement, double-tap seek cue ---------- */
+html:not(.safafi-tv-profile) .sf-subtitle{width:max-content;max-width:88%!important}
+@media (max-aspect-ratio:1/1){
+  html:not(.safafi-tv-profile) .sf-subtitle[data-pos="bottom"],html:not(.safafi-tv-profile).safafi-controls-active .sf-subtitle[data-pos="bottom"]{bottom:max(12px,calc(50vh - 28.125vw + 10px))!important}
+}
+.sc-seek-flash{position:absolute;top:50%;z-index:62;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:96px;height:96px;margin-top:-48px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-family:var(--sf-font,system-ui);pointer-events:none;animation:sc-seek-flash 650ms ease-out forwards}
+.sc-seek-flash span{font-size:30px;line-height:1}.sc-seek-flash b{font-size:16px}
+.sc-seek-flash.is-back{left:12%}.sc-seek-flash.is-forward{right:12%}
+@keyframes sc-seek-flash{0%{opacity:0;transform:scale(.8)}20%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.08)}}
+html:not(.safafi-tv-profile) .sc-player-top{padding-top:calc(44px + env(safe-area-inset-top) / var(--sf-ui-zoom,1));padding-left:calc(72px + env(safe-area-inset-left) / var(--sf-ui-zoom,1));padding-right:calc(72px + env(safe-area-inset-right) / var(--sf-ui-zoom,1))}
+html:not(.safafi-tv-profile) .sc-player-bottom{padding-bottom:calc(48px + env(safe-area-inset-bottom) / var(--sf-ui-zoom,1));padding-left:calc(72px + env(safe-area-inset-left) / var(--sf-ui-zoom,1));padding-right:calc(72px + env(safe-area-inset-right) / var(--sf-ui-zoom,1))}
+.sf-main-panel .sf-media-options button{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.sf-main-panel .sf-media-options button>small{margin-top:0;flex-shrink:0;max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sf-main-panel .sf-media-options button[aria-checked="true"]>small{color:#34d399}
